@@ -1,0 +1,52 @@
+.udeCarousel{
+    background-image: url(../img/cover.jpg);
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    .udeCarousel__content{
+        width: 75%;
+        margin: auto;
+    }
+    .search-carousel{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        color: #fff;
+        h2{
+            font-size: 40px;
+            font-weight: 700;
+        }
+        p{
+            font-size: 18px;
+            line-height: 1.61;
+        }
+        .header__form{
+        
+            @include styleFormSearch($color-white-0,$color-white-0,$color-white-0);
+        }
+    }
+}
+//responsive
+
+@include responsive("medium"){
+    .udeCarousel{
+        height: 300px;
+        .search-carousel{
+            h2{
+                font-size: 24px;
+                font-weight: 400;
+            }
+            p{
+                font-size: 18px;
+                line-height: 1.61;
+            }
+        }
+        .udeCarousel__content{
+            width: 88%;
+        }
+    }
+    
+}

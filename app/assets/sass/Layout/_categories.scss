@@ -1,0 +1,40 @@
+.categories{
+    margin-top: $mg-2;
+    margin-bottom: $mg-2;
+    h3{
+        @include styleText($color-black-0 ,$fs-3, $fw-bold);
+        margin-bottom: 20px;
+    }
+    .categories__content{
+        width: 75.8%;
+        margin: auto;
+       
+        .categories__items{
+            // border: solid #ddd 1px;
+            padding: 15px;
+            box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+            margin-bottom: 1rem;
+            span{
+                &:first-child{
+                    font-size: 32px;
+                    padding-right: 16px;
+                    @include styleText($color-gray-4, 32px, 900)
+                }
+                &:last-child{
+                    vertical-align: super;
+                    @include styleText($color-gray-4, 15px, $fw-normal)
+                }
+            }
+        }
+    }
+    
+}
+//res
+@include responsive("XXL"){
+    .categories{
+        .categories__content{
+            width: 90%;
+            margin: auto;
+        }
+    }
+}

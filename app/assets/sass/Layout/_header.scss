@@ -1,0 +1,117 @@
+header{
+    @include styleText($color-black-light, $fs-1, $fw-normal)
+}
+.js-pride-month-gradient{
+   width: 100%; height: 0.5rem; background: linear-gradient(90deg, rgb(100, 91, 83) 0%, rgb(235, 82, 82) 18.23%, rgb(247, 143, 47) 34.37%, rgb(244, 193, 81) 48.96%, rgb(82, 187, 118) 66.15%, rgb(38, 165, 215) 82.29%, rgb(224, 105, 183) 100%);
+}
+.navbar{
+    width: 80%;
+    margin: auto;
+    .fa-bars{
+        padding-right: 5px;
+    }
+}
+.header__left{
+    display: flex;
+    align-items: center;
+   
+    .navbar-brand{
+        flex-grow: 1;
+        img{
+            width: 110px;
+        }
+    }
+    .categories{
+        flex-grow: 1;
+        font-size: 15px;
+        color: #8a92a3;
+        .fa-th{
+            padding-right: 5px;
+        }
+    }
+    .header__form {
+        flex-grow: 10;
+        @include styleFormSearch($color-white-cream, $color-white-cream, $color-gray-6);
+        .input-group{
+            .input-group-append{
+                display: flex;
+            }
+        }
+    }
+
+        
+}
+.header__right{
+    display: flex;
+    justify-content: flex-end;
+    line-height: 30px;
+   li{
+       a{
+        @include styleText($color-black-light, $fs-1, $fw-normal)
+       }
+       }
+   } 
+.ude-btgr{
+    
+    .btn{
+        margin-bottom: 0;
+        font-weight: 700;
+        text-align: center;
+        vertical-align: middle;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 11px 12px;
+        font-size: 15px;
+        line-height: 1.35135;
+        border-radius: 2px;
+        user-select: none;
+    }
+    .login{
+        color: #686f7a;
+        background-color: #fff;
+        border: 1px solid #686f7a;
+        margin-right: 5px;
+        &:hover{
+            color: #111;
+        }
+   }
+   .create{
+        color: #fff;
+        background-color: #ec5252;
+        border: 1px solid transparent;
+        &:hover{
+            color: #fff;
+            background-color: #992337;
+            border-color: transparent;
+        }
+    }
+}
+//responsivex
+.header__right{
+    @include responsive("extra-large"){
+        .business,.tech{
+            display: none;
+        }
+    }
+    @include responsive("medium"){
+        .ude-btgr{
+            display: none;
+        }
+    }
+    .ude-btgr{
+        white-space: nowrap;
+    }
+}
+.header__left{
+    @include responsive("medium"){
+        .header__form,.categories{
+            display: none;
+        }
+    }
+}
+@include responsive("medium"){
+    .navbar{
+      width: 100%;
+    }
+  }

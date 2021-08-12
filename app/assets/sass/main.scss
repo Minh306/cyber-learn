@@ -1,0 +1,29 @@
+// không chứa code css chỉ chứa đường dẫn đến các file con
+// tất cả các file con phải có dấu gạch dưới đầu tiên --> không biên dịch file con 
+//Helper
+@import './Helper/variables';
+@import './Helper/mixin';
+//Vendor
+
+//Base
+@import './Base/reset';
+@import './Base/customize';
+
+//Components
+@import './Components/button';
+
+//Layout
+@import './Layout/header';
+@import './Layout/login';
+@import './Layout/udeCarousel';
+@import './Layout/intro';
+@import './Layout/courses';
+@import './Layout/services';
+@import './Layout/viewIn';
+@import './Layout/banner';
+@import './Layout/categories';
+@import './Layout/social';
+@import './Layout/footer__top';
+//Page
+
+//Theme

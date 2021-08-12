@@ -1,0 +1,56 @@
+.background-udemy{
+    background-image: url(../img/background-login.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.form-group{
+    input{
+        &:focus{
+            border-color: #992337;
+            box-shadow: 0 0 0 1px #ec5252;
+        }
+    }
+}
+.form-sign-in {
+    background: linear-gradient(to bottom,rgba(92,24,55,.9),rgba(237,236,230,.9));
+    width: 360px;
+    padding: 30px;
+    color: #fff;
+}
+.form-sign-in .loginBtn {
+    color: #fff;
+    background-color: #ec5252;
+    border: 1px solid transparent;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    &:hover{
+        color: #fff;
+        background-color: #992337;
+        border-color: transparent;
+    }
+}
+.logo-form{
+    text-align: center;
+    img{
+        // padding: 0px 0px 20px;
+        width: 150px;
+        margin: auto;
+    }
+}
+
+.btn-singup{
+    color: white;
+    text-decoration: none;
+    &:hover{
+        color: rgb(92, 24, 55);
+        text-decoration: none;
+    }
+}
