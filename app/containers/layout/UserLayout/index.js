@@ -3,11 +3,12 @@ import { Route } from 'react-router-dom';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 
-export const UserLayout = ({ Component, ...restProps }) => (
-  <Route
-    {...restProps}
-    render={propsRoute => <Fragment>
+export const UserLayout = ({ Component, ...restProps }) => {
+  return <Route {...restProps} render={(propsRoute) => {
+    return <Fragment>
       <Header />
       <Component {...propsRoute} />
       <Footer />
-    </Fragment>} />
+    </Fragment>
+  }} />
+}
