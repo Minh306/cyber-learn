@@ -1,5 +1,16 @@
-.background-udemy{
+.background-udemy-signin{
     background-image: url(../img/background-login.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.background-udemy-signup{
+    background-image: url(../img/Udemy-06.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -18,7 +29,8 @@
     }
 }
 .form-sign-in {
-    background: linear-gradient(to bottom,rgba(92,24,55,.9),rgba(237,236,230,.9));
+    // background: linear-gradient(to bottom,rgba(92,24,55,.9),rgba(237,236,230,.9));
+    background: #ffffffc7;
     width: 360px;
     padding: 30px;
     color: #fff;
@@ -47,7 +59,7 @@
 }
 
 .btn-singup{
-    color: white;
+    color: #111;
     text-decoration: none;
     &:hover{
         color: rgb(92, 24, 55);
