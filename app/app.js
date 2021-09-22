@@ -13,8 +13,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
+import { SnackbarProvider } from 'notistack';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
+import Slide from '@material-ui/core/Slide';
 
 // Import root app
 import App from 'containers/App';
@@ -32,18 +34,34 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+import { Button } from '@material-ui/core';
 
 // Create redux store with history
 const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
+const notistackRef = React.createRef();
+const onClickDismiss = key => () => {
+  notistackRef.current.closeSnackbar(key);
+}
+
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <App />
+          <SnackbarProvider ref={notistackRef} action={(key) => (
+            <Button onClick={onClickDismiss(key)}>
+              ✖️
+            </Button>
+          )} maxSnack={1} anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+            TransitionComponent={Slide}>
+            <App />
+          </SnackbarProvider>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

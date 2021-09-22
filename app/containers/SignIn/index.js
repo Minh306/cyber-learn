@@ -7,20 +7,13 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import { makeSelectLogin } from './selectors';
 import logoForm from '../../assets/img/logoUdemy.png';
-import { onLoginInAction } from './actions';
+import { onLoginInAction, onRedirectInAction } from './actions';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 import reducer from './reducers';
 import saga from './sagas';
 import { useFormik } from "formik";
 import * as yup from "yup";
-
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import { withSnackbar } from 'notistack';
 
 const userSchema = yup.object().shape({
   taiKhoan: yup.string().required("Tên đăng nhập không thể bỏ trống !!!"),
@@ -35,13 +28,6 @@ const userSchema = yup.object().shape({
 
 function SignIn(props) {
   const history = useHistory();
-
-  const [state, setState] = React.useState({
-    vertical: 'top',
-    horizontal: 'right',
-  });
-
-  const { vertical, horizontal } = state;
   // const [form, setForm] = useState({ taiKhoan: '', matKhau: '' });
   const {
     handleChange,
@@ -75,25 +61,10 @@ function SignIn(props) {
         setAllTouched();
         return;
       }
-      console.log("!", values);
       props.onLogin(values);
     },
     [values, isValid]
   );
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
 
   // const handleChange = e => {
   //   e.preventDefault();
@@ -107,67 +78,72 @@ function SignIn(props) {
 
   const loginData = JSON.parse(localStorage.getItem('loginData'));
   const { accessToken } = loginData || {};
+  const { isError, isLogin } = useSelector(state => state.loginData)
   useEffect(() => {
     if (accessToken) {
+      props.onRedirect();
       history.push('/');
     }
-  }, [loginData]);
+    if (isError === true) {
+      props.enqueueSnackbar('Tài khoản hoặc mật khẩu không đúng, vui lòng thử lại !!!', { 
+        variant: 'error', 
+    });
+    }
+    if (isLogin === true) {
+      props.enqueueSnackbar('Đăng nhập thành công !!!', {
+        variant: 'success',
+      });
+    }
+  }, [loginData, isError, history]);
 
   return (
-    <>
-      <div className="background-udemy-signin">
-        <div className="form-sign-in">
-          <div className="logo-form">
-            <img src={logoForm} className="img" alt="" />
-          </div>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input
-                name="taiKhoan"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.taiKhoan}
-                type="text"
-                className="form-control"
-                id="sign-in-username"
-                placeholder="Tên Đăng Nhập"
-              />
-              {errors.taiKhoan && touched.taiKhoan && (
-                <p className="text-danger">{errors.taiKhoan}</p>
-              )}
-            </div>
-            <div className="form-group">
-              <input
-                name="matKhau"
-                type="password"
-                onChange={handleChange}
-                value={values.matKhau}
-                onBlur={handleBlur}
-                className="form-control"
-                id="sign-in-pass"
-                placeholder="Mật Khẩu"
-              />
-              {errors.matKhau && touched.matKhau && (
-                <p className="text-danger">{errors.matKhau}</p>
-              )}
-            </div>
-            <button type="submit" className="loginBtn">
-              Đăng nhập
-            </button>
-            <div style={{ textAlign: 'center', marginTop: 20 }}>
-              <a className="btn-singup">
-                Chưa Có Tài Khoản ? Đăng Ký
-              </a>
-            </div>
-          </form>
+    <div className="background-udemy-signin">
+      <div className="form-sign-in">
+        <div className="logo-form">
+          <img src={logoForm} className="img" alt="" />
         </div>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              name="taiKhoan"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.taiKhoan}
+              type="text"
+              className="form-control"
+              id="sign-in-username"
+              placeholder="Tên Đăng Nhập"
+            />
+            {errors.taiKhoan && touched.taiKhoan && (
+              <p className="text-danger">{errors.taiKhoan}</p>
+            )}
+          </div>
+          <div className="form-group">
+            <input
+              name="matKhau"
+              type="password"
+              onChange={handleChange}
+              value={values.matKhau}
+              onBlur={handleBlur}
+              className="form-control"
+              id="sign-in-pass"
+              placeholder="Mật Khẩu"
+            />
+            {errors.matKhau && touched.matKhau && (
+              <p className="text-danger">{errors.matKhau}</p>
+            )}
+          </div>
+          <button type="submit" className="loginBtn">
+            Đăng nhập
+          </button>
+          <div style={{ textAlign: 'center', marginTop: 20 }}>
+            <NavLink className="btn-singup" to="/signup">
+              Chưa Có Tài Khoản ? Đăng Ký
+            </NavLink>
+          </div>
+        </form>
       </div>
-      <Snackbar anchorOrigin={{ vertical, horizontal }} open={true} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          Đăng nhập thành công !!!
-        </Alert>
-      </Snackbar>
-    </>
+    </div>
   );
 }
 
@@ -177,6 +153,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onLogin: params => dispatch(onLoginInAction(params)),
+    onRedirect: () => dispatch(onRedirectInAction())
   };
 }
 
@@ -189,12 +166,11 @@ const key = 'loginData';
 const withReducer = injectReducer({ key, reducer });
 const withSaga = injectSaga({ key, saga });
 
-// export default compose(withConnect, memo)(SignIn);
-
 export default compose(
   withRouter,
   withReducer,
   withSaga,
   withConnect,
   memo,
+  withSnackbar,
 )(SignIn);

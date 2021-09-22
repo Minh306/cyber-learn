@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { LOGIN, LOGIN_DONE, LOGIN_ERRORS, LOGIN_LOCAL } from './constants';
+import { LOGIN, LOGIN_DONE, LOGIN_ERRORS, LOGIN_LOCAL, LOGIN_REDIRECT } from './constants';
 
 export const initialState = {
   isLoading: false,
@@ -13,12 +13,14 @@ const loginReducer = (state = initialState, action) =>
     switch (action.type) {
       case LOGIN:
         draft.isLoading = true;
+        draft.isError = false;
         return draft;
 
       case LOGIN_DONE:
         draft.userData = action.payload;
         draft.isLogin = true;
         draft.isLoading = false;
+        draft.isError = false;
         return draft;
 
       case LOGIN_ERRORS:
@@ -30,6 +32,11 @@ const loginReducer = (state = initialState, action) =>
       case LOGIN_LOCAL:
         draft.isLogin = true;
         draft.userData = action.payload;
+        return draft;
+
+      case LOGIN_REDIRECT:
+        draft.isLogin = false;
+        draft.isError = false;
         return draft;
 
       default:

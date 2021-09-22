@@ -39,7 +39,7 @@ function SignUp(props) {
                             type="text"
                             className="form-control"
                             id="sign-in-username"
-                            placeholder="Username"
+                            placeholder="Tên Đăng Nhập"
                         />
                     </div>
                     <div className="form-group">
@@ -50,7 +50,7 @@ function SignUp(props) {
                             //   value={form.matKhau}
                             className="form-control"
                             id="sign-in-passowrd"
-                            placeholder="Password"
+                            placeholder="Mật Khẩu"
                             autoComplete="on"
                         />
                     </div>
@@ -62,7 +62,7 @@ function SignUp(props) {
                             type="password"
                             className="form-control"
                             id="sign-in-new-passowrd"
-                            placeholder="Confirm Password"
+                            placeholder="Nhập Lại Mật Khẩu"
                             autoComplete="on"
                         />
                     </div>
@@ -71,7 +71,7 @@ function SignUp(props) {
                     </button>
                     <div style={{ textAlign: 'center', marginTop: 20 }}>
                         <NavLink className="btn-singup" to="/signin">
-                            Have A Account ? Sign In 
+                            Đã có tài khoản ? Đăng nhập
                         </NavLink>
                     </div>
                 </form>
