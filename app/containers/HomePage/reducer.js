@@ -23,7 +23,7 @@ const homeReducer = (state = initialState, action) =>
       case INIT:
         // Delete prefixed '@' from the github username
         draft.isLoading = true;
-        break;
+        return draft;
 
       case INIT_CATE:
         // Delete prefixed '@' from the github username

@@ -1,5 +1,7 @@
 import {
+  LOGOUT,
   ON_NEXT,
+  RE_LOGIN,
   SEARCH,
   SEARCH_CANCEL,
   SEARCH_CANCEL_DONE,
@@ -47,5 +49,18 @@ export function onSearchCancelDoneErrors() {
 export function onNew() {
   return {
     type: ON_NEXT,
+  };
+}
+
+export function onReLogin(payload) {
+  return {
+    type: RE_LOGIN,
+    payload
+  };
+}
+
+export function onLogout(payload) {
+  return {
+    type: LOGOUT,
   };
 }

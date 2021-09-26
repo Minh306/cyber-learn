@@ -1,4 +1,4 @@
-import React, { memo, useRef } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
@@ -7,17 +7,23 @@ import logoUdemy from '../../assets/img/logo-coral.svg';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
 import { makeSelectSearchCourse } from './selector';
-import { onSearchCancel, onSearchInActionFile } from './action';
+import { onLogout, onReLogin, onSearchCancel, onSearchInActionFile } from './action';
+import { NavLink, useHistory, withRouter } from 'react-router-dom';
+
 import reducer from './reducer';
 import saga from './saga';
 
 export function Header(props) {
   const key = 'searchCourse';
+
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
+
+  const loginData = JSON.parse(localStorage.getItem('loginData'));
   const dataSearch = useRef(React.createRef());
   const isSearch = useSelector(state => (state.searchCourse || {}).isSearch);
-  console.log(isSearch);
+  const isLogin = useSelector(state => (state.searchCourse || {}).isLogin);
+
   const handleSubmit = () => {
     props.onSearch(dataSearch.current.value);
   };
@@ -28,6 +34,17 @@ export function Header(props) {
     slickTrack.className += ' slick-track-reset';
     dataSearch.current.value = '';
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('loginData');
+    props.onLogout();
+  }
+
+  useEffect(() => {
+    if (loginData) {
+      props.onReLogin(loginData);
+    }
+  }, []);
 
   return (
     <header>
@@ -103,11 +120,13 @@ export function Header(props) {
                   <i className="fa fa-shopping-cart" />
                 </a>
               </li>
-              <li className="nav-item ude-btgr">
-                <button className="btn login">Login</button>
-                <button className="btn create">Sign Up</button>
+              {isLogin ? <li className="nav-item ude-btgr">
+                <button onClick={handleLogout} className="btn create">Logout</button>
+              </li> : <li className="nav-item ude-btgr">
+                <NavLink to="/signin" className="btn login">Login</NavLink>
+                <NavLink to="/signup" className="btn create">Sign Up</NavLink>
               </li>
-              {/* <div class="visible-lg-block visible-xl-block header-right-divider"></div> */}
+              }
             </ul>
           </div>
         </div>
@@ -127,6 +146,8 @@ export function mapDispatchToProps(dispatch) {
   return {
     onSearch: params => dispatch(onSearchInActionFile(params)),
     onSearchCancel: () => dispatch(onSearchCancel()),
+    onReLogin: params => dispatch(onReLogin(params)),
+    onLogout: () => dispatch(onLogout())
   };
 }
 

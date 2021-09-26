@@ -1,6 +1,8 @@
 import produce from 'immer';
 import {
+  LOGOUT,
   ON_NEXT,
+  RE_LOGIN,
   SEARCH,
   SEARCH_CANCEL,
   SEARCH_CANCEL_DONE,
@@ -11,11 +13,13 @@ import {
 
 // The initial state of the App
 export const initialState = {
+  courseList: [],
+  loginData: [],
   isLoading: false,
   isError: false,
-  courseList: [],
   isSearch: false,
   isCancel: false,
+  isLogin: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -60,6 +64,17 @@ const searchReducer = (state = initialState, action) =>
       case ON_NEXT:
         draft.isCancel = false;
         return draft;
+
+      case RE_LOGIN:
+        draft.loginData = action.payload;
+        draft.isLogin = true;
+        return draft;
+
+      case LOGOUT:
+        draft.loginData = [];
+        draft.isLogin = false;
+        return draft;
+
       default:
         return draft;
     }
