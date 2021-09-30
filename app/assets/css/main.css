@@ -314,6 +314,7 @@ div
 .logo-form img {
   width: 150px;
   margin: auto;
+  cursor: pointer;
 }
 
 .btn-singup {

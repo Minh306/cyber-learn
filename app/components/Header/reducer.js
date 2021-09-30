@@ -53,6 +53,7 @@ const searchReducer = (state = initialState, action) =>
         draft.isSearch = false;
         draft.isLoading = false;
         draft.isCancel = true;
+        draft.courseList = [];
         return draft;
 
       case SEARCH_CANCEL_ERRORS:

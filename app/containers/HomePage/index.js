@@ -20,6 +20,7 @@ function HomePage(props) {
   const key = 'homePage';
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
+  
   useEffect(() => {
     props.initHome();
   }, []);

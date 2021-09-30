@@ -24,7 +24,6 @@ export function* handleSearchItem(courseName) {
   try {
     const searchData = yield call(request, requestURL, 'GET');
     yield put(onSearchDone(searchData));
-    yield put(initDone([]));
   } catch (err) {
     yield put(onSearchErrors(err));
   }
@@ -35,7 +34,7 @@ export function* handleSearchCancel() {
     'https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP03';
   try {
     const searchData = yield call(request, requestURL, 'GET');
-    yield put(initDone(searchData));
+    // yield put(initDone(searchData));
     yield put(onSearchCancelDone());
   } catch (err) {
     yield put(onSearchCancelDoneErrors(err));

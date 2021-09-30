@@ -8,7 +8,6 @@ import injectSaga from 'utils/injectSaga';
 import { makeSelectLogin } from './selectors';
 import logoForm from '../../assets/img/logoUdemy.png';
 import { onLoginInAction, onRedirectInAction } from './actions';
-import { SnackbarProvider, useSnackbar } from 'notistack';
 import reducer from './reducers';
 import saga from './sagas';
 import { useFormik } from "formik";

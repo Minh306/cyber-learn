@@ -114,7 +114,7 @@ function SignUp(props) {
         <div className="background-udemy-signup">
             <div className="form-sign-in">
                 <div className="logo-form">
-                    <img src={logoForm} className="img" alt="" />
+                    <img onClick={() => history.push("/")} src={logoForm} className="img" alt="" />
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">

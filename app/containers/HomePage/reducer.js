@@ -21,29 +21,25 @@ const homeReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case INIT:
-        // Delete prefixed '@' from the github username
         draft.isLoading = true;
         return draft;
 
-      case INIT_CATE:
-        // Delete prefixed '@' from the github username
-        draft.categories = action.payload;
-        return draft;
-
-      case INIT_COURSE_BY_CATE:
-        draft.courseListByCate = action.payload;
-        return draft;
-
       case INIT_DONE:
-        // Delete prefixed '@' from the github username
         draft.isLoading = false;
         draft.courseList = action.payload;
         return draft;
 
       case INIT_ERROR:
-        // Delete prefixed '@' from the github username
         draft.isLoading = false;
         draft.isError = true;
+        return draft;
+
+      case INIT_CATE:
+        draft.categories = action.payload;
+        return draft;
+
+      case INIT_COURSE_BY_CATE:
+        draft.courseListByCate = action.payload;
         return draft;
 
       default:
