@@ -284,11 +284,6 @@ div
   height: 100vh;
 }
 
-.form-group input:focus {
-  border-color: #992337;
-  box-shadow: 0 0 0 1px #ec5252;
-}
-
 .form-sign-in {
   background: #ffffffc7;
   width: 360px;

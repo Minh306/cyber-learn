@@ -29,6 +29,7 @@ const userSchema = yup.object().shape({
 function SignIn(props) {
   const history = useHistory();
   // const [form, setForm] = useState({ taiKhoan: '', matKhau: '' });
+  console.log(props)
   const {
     handleChange,
     values,

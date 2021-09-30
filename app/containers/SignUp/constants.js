@@ -1,0 +1,3 @@
+export const REGISTER = 'REGISTER'
+export const REGISTER_DONE = 'REGISTER@@DONE'
+export const REGISTER_ERRORS = 'REGISTER@@ERRORS'

@@ -20,14 +20,14 @@
     width: 100vw;
     height: 100vh;
 }
-.form-group{
-    input{
-        &:focus{
-            border-color: #992337;
-            box-shadow: 0 0 0 1px #ec5252;
-        }
-    }
-}
+// .form-group{
+//     input{
+//         &:focus{
+//             border-color: #992337;
+//             box-shadow: 0 0 0 1px #ec5252;
+//         }
+//     }
+// }
 .form-sign-in {
     // background: linear-gradient(to bottom,rgba(92,24,55,.9),rgba(237,236,230,.9));
     background: #ffffffc7;
