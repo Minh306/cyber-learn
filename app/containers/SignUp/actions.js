@@ -1,4 +1,4 @@
-import { REGISTER, REGISTER_DONE, REGISTER_ERRORS } from './constants'
+import { REGISTER, REGISTER_DONE, REGISTER_ERRORS, REGISTER_REDIRECT } from './constants'
 
 export function onRegister(payload) {
     return {
@@ -19,4 +19,10 @@ export function onRegisterErrors(payload) {
         type: REGISTER_ERRORS,
         payload,
     };
+}
+
+export function onRegisterRedirect(){
+    return {
+        type: REGISTER_REDIRECT,
+    }
 }

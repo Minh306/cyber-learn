@@ -10,7 +10,7 @@ import reducer from './reducers';
 import saga from './sagas';
 import { withSnackbar } from 'notistack';
 import { makeSelectRegister } from './selectors';
-import { onRegister } from './actions';
+import { onRegister, onRegisterRedirect } from './actions';
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -64,11 +64,18 @@ function SignUp(props) {
     });
 
     const setAllTouched = useCallback(() => {
-        const fields = ["taiKhoan", "matKhau", "soDT", "email"];
+        const fields = ["taiKhoan", "matKhau","hoTen", "soDT", "email"];
         fields.forEach((field) => {
             setFieldTouched(field, true);
         });
     }, [setFieldTouched]);
+
+    const setAllNotTouched = useCallback(() => {
+        const fields = ["taiKhoan", "matKhau","hoTen", "soDT", "email"];
+        fields.forEach((field) => {
+            setFieldTouched(field, false);
+        });
+    }, [setAllNotTouched]);
 
     const isSuccess = useSelector(state => (state.register || {}).isSuccess);
 
@@ -104,6 +111,8 @@ function SignUp(props) {
     useEffect(() => {
         if (isSuccess === true) {
             setValues({ taiKhoan: '', matKhau: '', nhapLaiMatKhau: '', hoTen: '', soDT: '', maLoaiNguoiDung: 'HV', maNhom: 'GP03', email: '' });
+            setAllNotTouched()
+            props.onRegisterRedirect();
             props.enqueueSnackbar('Đăng kí thành công !!!', {
                 variant: 'success',
             });
@@ -227,6 +236,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
     return {
         onRegister: params => dispatch(onRegister(params)),
+        onRegisterRedirect: () => dispatch(onRegisterRedirect()),
     };
 }
 

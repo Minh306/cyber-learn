@@ -19,15 +19,10 @@ const userSchema = yup.object().shape({
   matKhau: yup
     .string()
     .required("Mật khẩu không thể bỏ trống !!!"),
-  // phone: yup
-  //   .string()
-  //   .required("Số điện thoại không được bỏ trống")
-  //   .matches(/^[0-9]{10}$/, "Số điện thoại không hợp lệ"),
 });
 
 function SignIn(props) {
   const history = useHistory();
-  // const [form, setForm] = useState({ taiKhoan: '', matKhau: '' });
   console.log(props)
   const {
     handleChange,
@@ -66,16 +61,6 @@ function SignIn(props) {
     [values, isValid]
   );
 
-  // const handleChange = e => {
-  //   e.preventDefault();
-  //   setForm({ ...form, [e.target.name]: e.target.value });
-  // };
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   props.onLogin(form);
-  // };
-
   const loginData = JSON.parse(localStorage.getItem('loginData'));
   const { accessToken } = loginData || {};
   const { isError, isLogin } = useSelector(state => state.loginData)
@@ -100,7 +85,7 @@ function SignIn(props) {
     <div className="background-udemy-signin">
       <div className="form-sign-in">
         <div className="logo-form">
-          <img src={logoForm} className="img" alt="" />
+          <img onClick={() => history.push('/')} src={logoForm} className="img" alt="" />
         </div>
         <form onSubmit={handleSubmit}>
           <div className="form-group">

@@ -13,7 +13,7 @@ import { fetchCourse, fetchCategories } from '../../api';
 /**
  * Github repos request/response handler
  */
- export default function* homePageSaga() {
+export default function* homePageSaga() {
   yield takeLatest(INIT, handleInit);
 }
 
@@ -27,8 +27,7 @@ export function* handleInit() {
       categories.map(cate =>
         call(
           request,
-          `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${
-            cate.maDanhMuc
+          `https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${cate.maDanhMuc
           }&MaNhom=GP03`,
           'GET',
         ),

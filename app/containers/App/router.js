@@ -2,13 +2,11 @@ import React from "react";
 
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
+import Detail from '../Detail';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-
-// import App from '../App';
-// import Login from "../login/Loadable";
 
 const routes = [
     {
@@ -21,14 +19,19 @@ const routes = [
         path: "/signup",
         exact: true,
         main: () => <SignUp />,
-        // permission: ['GV'],
         private: false,
     },
     {
         path: "/",
         exact: true,
-        main: () => <>  <Header /> <HomePage /> <Footer /></>,
-        permission: ['HV'],
+        main: () => <><Header /> <HomePage /> <Footer /></>,
+        // permission: ['GV'],
+        private: false,
+    },
+    {
+        path: "/detail",
+        exact: true,
+        main: () => <Detail />,
         private: false,
     },
     {
