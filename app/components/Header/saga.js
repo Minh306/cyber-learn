@@ -10,7 +10,6 @@ import {
 } from './action';
 
 import request from '../../utils/request';
-import { initDone } from '../../containers/HomePage/action';
 
 export default function* searchSaga() {
   yield takeLatest(SEARCH_CANCEL, handleSearchCancel);
@@ -30,11 +29,7 @@ export function* handleSearchItem(courseName) {
 }
 
 export function* handleSearchCancel() {
-  const requestURL =
-    'https://elearning0706.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP03';
   try {
-    const searchData = yield call(request, requestURL, 'GET');
-    // yield put(initDone(searchData));
     yield put(onSearchCancelDone());
   } catch (err) {
     yield put(onSearchCancelDoneErrors(err));

@@ -23,7 +23,6 @@ const userSchema = yup.object().shape({
 
 function SignIn(props) {
   const history = useHistory();
-  console.log(props)
   const {
     handleChange,
     values,

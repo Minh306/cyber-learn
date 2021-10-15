@@ -1,0 +1,33 @@
+.my-4{
+    h1{
+        font-weight: 700;
+        margin-bottom: 0px;
+    }
+    small{
+        font-size: 13px;
+    }
+    .rating{
+        display: flex;
+        .rating_star{
+            @include styleText($color-yellow, $fs-1, $fw-normal);
+            margin-right:$mg-0;
+        }
+        span:nth-child(1){
+            @include styleText($color-yellow, 15px, $fw-bold);
+            margin-left:$mg-0;
+            margin-right:5px;
+        }
+        span:nth-child(2){
+            @include styleText($color-gray-4, $fs-1, $fw-bold);
+            margin-left:$mg-0;
+        }
+        span:nth-child(3){
+            @include styleText($color-gray-4, 15px, $fw-normal);
+           
+        }
+        span:last-child{
+            @include styleText($color-gray-4, 15px, $fw-normal);
+            margin-left: 5px;
+        }
+    }
+}

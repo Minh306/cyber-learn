@@ -29,9 +29,9 @@ const routes = [
         private: false,
     },
     {
-        path: "/detail",
+        path: "/detail/:id",
         exact: true,
-        main: () => <Detail />,
+        main: () => <><Header /> <Detail /> <Footer /></>,
         private: false,
     },
     {

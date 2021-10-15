@@ -38,6 +38,7 @@ const userSchema = yup.object().shape({
 });
 
 function SignUp(props) {
+    console.log(props)
     const history = useHistory();
     const {
         handleChange,
@@ -79,10 +80,10 @@ function SignUp(props) {
 
     const isSuccess = useSelector(state => (state.register || {}).isSuccess);
 
-    // const handleChangePhone = (e) => {
-    //     const value = e.target.value.replace(/\D/g, "");
-    //     setForm({ ...form, [e.target.name]: value });
-    // };
+    const handleChangePhone = (e) => {
+        const value = e.target.value.replace(/\D/g, "");
+        setValues({ ...values, [e.target.name]: value });
+    };
 
     const handleSubmit = useCallback((event) => {
         event.preventDefault();
@@ -125,7 +126,7 @@ function SignUp(props) {
                 <div className="logo-form">
                     <img onClick={() => history.push("/")} src={logoForm} className="img" alt="" />
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} autoComplete="off">
                     <div className="form-group">
                         <input
                             name="taiKhoan"
@@ -149,7 +150,6 @@ function SignUp(props) {
                             onBlur={handleBlur}
                             className="form-control"
                             placeholder="Mật Khẩu"
-                            autoComplete="on"
                         />
                         {errors.matKhau && touched.matKhau && (
                             <p className="text-danger">{errors.matKhau}</p>
@@ -164,7 +164,6 @@ function SignUp(props) {
                             type="password"
                             className="form-control"
                             placeholder="Nhập Lại Mật Khẩu"
-                            autoComplete="on"
                         />
                         {errors.nhapLaiMatKhau && touched.nhapLaiMatKhau && (
                             <p className="text-danger">{errors.nhapLaiMatKhau}</p>
@@ -179,7 +178,6 @@ function SignUp(props) {
                             type="string"
                             className="form-control"
                             placeholder="Họ Và Tên"
-                            autoComplete="on"
                         />
                         {errors.hoTen && touched.hoTen && (
                             <p className="text-danger">{errors.hoTen}</p>
@@ -188,13 +186,12 @@ function SignUp(props) {
                     <div className="form-group">
                         <input
                             name="soDT"
-                            onChange={handleChange}
-                            value={values.soDT.replace(/\D/g, "")}
+                            onChange={handleChangePhone}
+                            value={values.soDT}
                             onBlur={handleBlur}
                             type="text"
                             className="form-control"
                             placeholder="Số Điện Thoại"
-                            autoComplete="on"
                         />
                         {errors.soDT && touched.soDT && (
                             <p className="text-danger">{errors.soDT}</p>
@@ -209,7 +206,6 @@ function SignUp(props) {
                             type="email"
                             className="form-control"
                             placeholder="Email"
-                            autoComplete="on"
                         />
                         {errors.email && touched.email && (
                             <p className="text-danger">{errors.email}</p>

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { NavLink, useHistory, withRouter } from 'react-router-dom';
 
 import Slider from 'react-slick';
 import '../../../../node_modules/slick-carousel/slick/slick-theme.css';
@@ -78,6 +79,7 @@ const settingsForViewIn = {
 };
 
 export default function CourseByCategories({ props }) {
+  const history = useHistory();
   return props.map((item, index) => {
     const active = index === 0 ? 'active' : '';
     const fade = index !== 0 ? 'fade' : '';
@@ -129,6 +131,9 @@ export default function CourseByCategories({ props }) {
                   <span className="old-price">$134.99</span>
                   <span className="new-price">$15.99</span>
                 </div>
+                <div className="detailView">
+                    <button onClick={() => history.push(`detail/${item.maKhoaHoc}`)}>Detail</button>
+                </div>
               </div>
             </div>
           ))}
@@ -140,7 +145,6 @@ export default function CourseByCategories({ props }) {
 
 export function CourseBySearch(props) {
   const { courseList } = props.course;
-  console.log(courseList);
   return (
     <div className="tab-pane container active">
       <Slider {...settingsForCourse}>
