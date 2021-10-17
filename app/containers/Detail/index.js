@@ -10,11 +10,14 @@ import { onDetail } from './actions';
 import { makeSelectDetail } from './selector';
 import reducer from './reducers';
 import saga from './sagas';
+import { RenderCourse } from '../../components/CourseList/Course';
 
 function Detail(props) {
     const detailCourse = useSelector(state => (state.detail || []).detailCourse);
+    const dataCourse = useSelector(state => (state.detail || []).dataCourse);
     const author = detailCourse.nguoiTao
-    console.log(detailCourse)
+    console.log(dataCourse)
+
     useEffect(() => {
         props.onDetail(props.match.params.id)
     }, [props.match.params.id])
@@ -44,7 +47,7 @@ function Detail(props) {
             </div>
             <div className="row">
                 <div className="col-md-8">
-                    <img className="card-img-top" src={detailCourse.hinhAnh} alt="" />
+                    <img className="img-fluid" src={detailCourse.hinhAnh} alt="" />
                 </div>
                 <div className="col-md-4">
                     <h3 className="my-3">Course Description</h3>
@@ -60,26 +63,7 @@ function Detail(props) {
             </div>
             <h3 className="my-4">Related Courses</h3>
             <div className="row">
-                <div className="col-md-3 col-sm-6 mb-4">
-                    <a href="#">
-                        <img className="img-fluid" src="https://via.placeholder.com/500x300" alt="" />
-                    </a>
-                </div>
-                <div className="col-md-3 col-sm-6 mb-4">
-                    <a href="#">
-                        <img className="img-fluid" src="https://via.placeholder.com/500x300" alt="" />
-                    </a>
-                </div>
-                <div className="col-md-3 col-sm-6 mb-4">
-                    <a href="#">
-                        <img className="img-fluid" src="https://via.placeholder.com/500x300" alt="" />
-                    </a>
-                </div>
-                <div className="col-md-3 col-sm-6 mb-4">
-                    <a href="#">
-                        <img className="img-fluid" src="https://via.placeholder.com/500x300" alt="" />
-                    </a>
-                </div>
+                <RenderCourse dataCourse={dataCourse}/>
             </div>
         </div>
     )

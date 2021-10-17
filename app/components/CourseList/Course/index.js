@@ -132,7 +132,7 @@ export default function CourseByCategories({ props }) {
                   <span className="new-price">$15.99</span>
                 </div>
                 <div className="detailView">
-                    <button onClick={() => history.push(`detail/${item.maKhoaHoc}`)}>Detail</button>
+                  <button onClick={() => history.push(`detail/${item.maKhoaHoc}`)}>Detail</button>
                 </div>
               </div>
             </div>
@@ -247,4 +247,15 @@ export function ViewInCourse(props) {
       ))}
     </Slider>
   );
+}
+
+export function RenderCourse(props) {
+  const { dataCourse } = props;
+  return dataCourse.map((item, index) => {
+    return (<div key={index} className="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+        <img className="img-fluid" src={item.hinhAnh} alt="" />
+      </a>
+    </div>)
+  })
 }
